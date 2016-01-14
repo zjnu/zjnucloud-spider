@@ -65,7 +65,7 @@ if __name__ == '__main__':
     spider = TZGGDetailSpider()
 
     # all_links = spider.changepage(url, 103)
-    all_links = spider.changepage(url, 1)
+    all_links = spider.changepage(url, 2)
 
     # Deal with each page of news
     for count, link in enumerate(all_links):

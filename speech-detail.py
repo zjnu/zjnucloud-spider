@@ -9,6 +9,11 @@ from lxml import etree
 __author__ = 'ddMax'
 
 TABLE_NAME = 'speech_detail'
+KEYWORDS = {
+    '讲座',
+    '浙师资讯',
+    '学术活动',
+}
 
 
 class SpeechDetailSpider(BaseSpider):
@@ -37,21 +42,11 @@ class SpeechDetailSpider(BaseSpider):
         result = list()
         for each in all_sections:
             title = str(each.xpath('./a/text()')[0])
-            if title.find('讲座') != -1 and title.find('浙师资讯') != -1:
-                id = int(re.findall(r'\d+', str(each.xpath('./a/@href')[0]), re.S)[0])
-                result.append(id)
+            for keyword in KEYWORDS:
+                if title.find(keyword) != -1:
+                    id = int(re.findall(r'\d+', str(each.xpath('./a/@href')[0]), re.S)[0])
+                    result.append(id)
         return result
-
-    # 提取讲座信息
-    def getallsection(self, selector):
-        allsection = selector.xpath('//div[@class="msg-item"]')
-        # 检测包含讲座关键字的新闻，并返回
-        target = list()
-        for each in allsection:
-            title = str(each.xpath('./div[@class="info"]/div[@class="title"]/a/text()')[0])
-            if title.find('讲座') != -1 and title.find('浙师资讯') != -1:
-                target.append(each)
-        return target
 
     def getinfo(self, source, id):
         info = dict()
@@ -103,8 +98,8 @@ if __name__ == '__main__':
     url_detail_base = 'http://www.aiweibang.com/yuedu/'
     spider = SpeechDetailSpider()
 
-    # all_links = spider.changepage(url, 12)
-    all_links = spider.changepage(url, 1)
+    # all_links = spider.changepage(url, 1)
+    all_links = spider.changepage(url, 2)
 
     # Deal with each page of news
     for count, link in enumerate(all_links):

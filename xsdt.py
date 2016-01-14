@@ -75,7 +75,7 @@ if __name__ == '__main__':
     spider = XSDTSpider()
 
     # all_links = spider.changepage(url, 396)
-    all_links = spider.changepage(url, 1)
+    all_links = spider.changepage(url, 2)
 
     for count, link in enumerate(all_links):
         print('Parsing ' + link + ':')

@@ -74,8 +74,8 @@ if __name__ == '__main__':
     url_detail = 'http://www.zjnu.edu.cn/news/common/article_show.aspx?article_id='
     spider = ZSXWDetailSpider()
 
-    all_links = spider.changepage(url, 318)
-    # all_links = spider.changepage(url, 1)
+    # all_links = spider.changepage(url, 318)
+    all_links = spider.changepage(url, 2)
 
     # Deal with each page of news
     for count, link in enumerate(all_links):

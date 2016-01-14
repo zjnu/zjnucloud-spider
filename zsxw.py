@@ -76,7 +76,7 @@ if __name__ == '__main__':
     spider = ZSXWSpider()
 
     # all_links = spider.changepage(url, 318)
-    all_links = spider.changepage(url, 1)
+    all_links = spider.changepage(url, 2)
 
     for count, link in enumerate(all_links):
         print('Parsing ' + link + ':')

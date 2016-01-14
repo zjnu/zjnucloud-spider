@@ -67,7 +67,7 @@ if __name__ == '__main__':
     url = 'http://cyxy.zjnu.edu.cn/list.aspx?cid=74&page=1'
     spider = ChuYangSpider()
 
-    all_links = spider.changepage(url, 10)
+    all_links = spider.changepage(url, 2)
 
     for count, link in enumerate(all_links):
         print('Parsing ' + link + ':')

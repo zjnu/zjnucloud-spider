@@ -6,7 +6,7 @@ __author__ = 'ddMax'
 class BaseSpider(object):
 
     def savetodb(self, table_name, dicdata):
-        conn = mysql.connector.connect(host='115.159.2.146', user='root', password='{ddmax}', database='zjnucloud')
+        conn = mysql.connector.connect(host='45.124.65.169', user='root', password='{ddmax}', database='zjnucloud')
         cursor = conn.cursor()
 
         # Convert dict into column->value

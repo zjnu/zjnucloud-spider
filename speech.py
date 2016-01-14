@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import requests
 import re
 from basespider import BaseSpider
@@ -10,6 +12,11 @@ from datetime import datetime
 __author__ = 'ddMax'
 
 TABLE_NAME = 'speech'
+KEYWORDS = {
+    '讲座',
+    '浙师资讯',
+    '学术活动',
+}
 
 
 class SpeechSpider(BaseSpider):
@@ -19,6 +26,7 @@ class SpeechSpider(BaseSpider):
 
     def getsource(self, url):
         html = requests.get(url)
+        html.encoding = "utf-8"
         selector = etree.HTML(html.text)
         return selector
 
@@ -37,8 +45,9 @@ class SpeechSpider(BaseSpider):
         target = list()
         for each in allsection:
             title = str(each.xpath('./div[@class="info"]/div[@class="title"]/a/text()')[0])
-            if title.find('讲座') != -1 and title.find('浙师资讯') != -1:
-                target.append(each)
+            for keyword in KEYWORDS:
+                if title.find(keyword) != -1:
+                    target.append(each)
         return target
 
     # 处理每条讲座信息，整合到字典中
@@ -66,7 +75,7 @@ if __name__ == '__main__':
     spider = SpeechSpider()
 
     # all_links = spider.changepage(url, 12)
-    all_links = spider.changepage(url, 1)
+    all_links = spider.changepage(url, 2)
 
     for count, link in enumerate(all_links):
         print('Parsing ' + link + ':')
