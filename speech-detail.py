@@ -11,7 +11,6 @@ __author__ = 'ddMax'
 TABLE_NAME = 'speech_detail'
 KEYWORDS = {
     '讲座',
-    '浙师资讯',
     '学术活动',
 }
 
