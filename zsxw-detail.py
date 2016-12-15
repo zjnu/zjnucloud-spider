@@ -75,7 +75,7 @@ if __name__ == '__main__':
     spider = ZSXWDetailSpider()
 
     # all_links = spider.changepage(url, 318)
-    all_links = spider.changepage(url, 2)
+    all_links = spider.changepage(url, 4)
 
     # Deal with each page of news
     for count, link in enumerate(all_links):

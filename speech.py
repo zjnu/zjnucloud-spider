@@ -74,7 +74,7 @@ if __name__ == '__main__':
     spider = SpeechSpider()
 
     # all_links = spider.changepage(url, 12)
-    all_links = spider.changepage(url, 2)
+    all_links = spider.changepage(url, 1)
 
     for count, link in enumerate(all_links):
         print('Parsing ' + link + ':')

@@ -53,8 +53,9 @@ class SpeechDetailSpider(BaseSpider):
         # 主体部分，使用正则处理
         restr = r'(<div id="article-inner">\s*).*?(<div class="page-content.*?)<div class="inner-box"'
         match = re.findall(restr, source, re.S)
-        article_fragment = match[0]
         article_content = ''
+        # if len(match) > 0:
+        article_fragment = match[0]
         for i in range(len(article_fragment)):
             article_content += article_fragment[i]
         # 处理特殊内容
@@ -97,8 +98,8 @@ if __name__ == '__main__':
     url_detail_base = 'http://www.aiweibang.com/yuedu/'
     spider = SpeechDetailSpider()
 
-    # all_links = spider.changepage(url, 1)
-    all_links = spider.changepage(url, 2)
+    all_links = spider.changepage(url, 1)
+    # all_links = spider.changepage(url, 2)
 
     # Deal with each page of news
     for count, link in enumerate(all_links):

@@ -51,7 +51,7 @@ class XSDTDetailSpider(BaseSpider):
         info['title'] = self.patchstr(str(selector.xpath(r'//*[@id="mytitle"]/text()')[0]))
         date = datetime.strptime(str(selector.xpath(r'//*[@id="mydate"]/text()')[0]), '%Y-%m-%d')
         # info['date'] = date.strftime('%Y-%m-%d')
-        info['date'] = date.strftime('%Yå¹´%mæœˆ%dæ—¥')
+        info['date'] = date.strftime('%Yå¹?mæœ?dæ—?)
         # Find the case that author can be blank!
         author = selector.xpath(r'//*[@id="myauthor"]/text()')
         info['author'] = str(author[0] if len(author) != 0 else '')
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     spider = XSDTDetailSpider()
 
     # all_links = spider.changepage(url, 396)
-    all_links = spider.changepage(url, 2)
+    all_links = spider.changepage(url, 4)
 
     # Deal with each page of news
     for count, link in enumerate(all_links):

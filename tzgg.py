@@ -29,23 +29,18 @@ class TZGGSpider(BaseSpider):
             page_group.append(link)
         return page_group
 
-    # 由于标题, ID与每一块新闻信息的特征不明显，因此单独抓取所有新闻标题
-    def getalltitlesandids(self, source):
+    # 由于标题, ID与每一块新闻信息的特征不明显，因此单独抓取所有新闻标�?    def getalltitlesandids(self, source):
         titles = re.findall(r'<SPAN style="FONT-WEIGHT:.*?_blank>(.*?)</a>', source, re.S)
         for count, each in enumerate(titles):
             titles[count] = each.strip()
         article_ids = re.findall(r'<SPAN style="FONT-WEIGHT:.*?article_id=(\d*)"', source, re.S)
-        # 以倒序的方式返回列表
-        return titles[::-1], article_ids[::-1]
+        # 以倒序的方式返回列�?        return titles[::-1], article_ids[::-1]
 
-    # 提取每块新闻信息（除标题和ID）
-    def getallsection(self, source):
+    # 提取每块新闻信息（除标题和ID�?    def getallsection(self, source):
         allsection = re.findall(r'<td bgcolor=FloralWhite>(.*?)</table></td>', source, re.S)
-        # 以倒序的方式返回列表
-        return allsection[::-1]
+        # 以倒序的方式返回列�?        return allsection[::-1]
 
-    # 处理标题+新闻信息，整合到字典中
-    def getinfo(self, eachsection, title, articleId):
+    # 处理标题+新闻信息，整合到字典�?    def getinfo(self, eachsection, title, articleId):
         info = dict()
         info['title'] = title
         info['articleId'] = int(articleId)
@@ -53,8 +48,8 @@ class TZGGSpider(BaseSpider):
         info['overview'] = self.patchstr(str(etree.HTML(eachsection).xpath(r'//tr[2]/td/div/text()')[0]).strip())
         date_author_hits = str(re.findall(r'COLOR: #006600; ">(.*?)</span>', eachsection, re.S))
         info['date'] = re.search(r'----(.*?)&nbsp;', date_author_hits, re.S).group(1).strip()
-        info['author'] = re.search(r'供稿：(.*?)&nbsp;', date_author_hits, re.S).group(1).strip()
-        info['hits'] = re.search(r'浏览次数：(\d*)', date_author_hits, re.S).group(1).strip()
+        info['author'] = re.search(r'供稿�?.*?)&nbsp;', date_author_hits, re.S).group(1).strip()
+        info['hits'] = re.search(r'浏览次数�?\d*)', date_author_hits, re.S).group(1).strip()
         return info
 
     def saveinfo(self, classinfo):
@@ -75,7 +70,7 @@ if __name__ == '__main__':
     spider = TZGGSpider()
 
     # all_links = spider.changepage(url, 103)
-    all_links = spider.changepage(url, 2)
+    all_links = spider.changepage(url, 4)
 
     for count, link in enumerate(all_links):
         print('Parsing ' + link + ':')
